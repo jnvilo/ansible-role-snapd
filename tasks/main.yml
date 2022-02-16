@@ -1,0 +1,26 @@
+---
+# tasks file for snapd
+
+
+- name: Install dnf if we are on CentOS 7
+  yum:
+    name: "dnf"
+    state: present
+  when:
+    - ansible_os_family == "Redhat"
+    - ansible_pkg_mgr = "yum"
+    - ansible_distribution_major_version == "7"
+
+- name" Install EPEL
+  dnf:
+    name: "epel-release"
+    state: present
+  when:
+    - ansible_os_family == "Redhat"
+
+- name: Install snapd
+  dnf:
+    name: "snapd"
+    state: present
+  notify:
+    - start_snapd_socket

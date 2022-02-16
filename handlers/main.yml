@@ -1,0 +1,10 @@
+---
+# handlers file for snapd
+
+- name: start_snapd_socket
+  service:
+    name: snapd.socket
+    state: started
+    enabled: yes
+
+
